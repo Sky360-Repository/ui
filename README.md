@@ -1,5 +1,14 @@
 Sky360 Tracking Webapp
 
+
++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++
+THIS READ ME IS A COUPLE OF WEEKS OUT OF DATE
+7-14-22
++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 // Work in Progress. Once the basic setup is made, will make into a docker image. Contains false placeholder data for now and an sqlite db. 
 
 
