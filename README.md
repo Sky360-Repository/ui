@@ -62,6 +62,7 @@ Problem with package "neomodel", you may have to install libgeos-dev --> "sudo a
 
 
 ============================================
+You can skip this. This is for Beeks only.
 Postgres and Postgis Installation
 ============================================
 To add PostGIS, you'll need to install additional programs in addition to libgeos-dev -->  
@@ -88,22 +89,22 @@ Linting: pylint https://pylint.org/
 
 
 ============================================
-TODO 7-1-2022
+TODO 8-3-2022
 ============================================
--Store map tiles for weather app in postgis db, create db, create connection. create correct path of db storage in portable drive/flash drive. https://djangocentral.com/using-postgresql-with-django/ and http://bostongis.com/?content_name=postgis_tut01
+-Beeks only. Store map tiles for weather app in postgis db, create db, create connection. create correct path of db storage in portable drive/flash drive. https://djangocentral.com/using-postgresql-with-django/ and http://bostongis.com/?content_name=postgis_tut01
 
 -Lint js files! Python linting (spaces instead of tabs)
 
 -Continue CSS/bootstrap work.
 
--Add 1/30th ffs for camera, etc. Completed, but add 1/60th time?
+-Add 1/30th fps for camera, etc. Completed, but add 1/60th time?
 
 -Create page within page for various graphs/map views. Wit-motion using highcharts possibly? 
 https://www.highcharts.com/demo/line-ajax
 
 -Put environment variables in seperate file. Does it matter since app is only for desktop?
 
--Add feature on admin page for users to add keys from various APIs. 
+-Add feature on admin page for users to add keys from various APIs.  (In progress)
 Users may be responsible for getting their own API keys where applicable. 
 Openstreetmaps DOES NOT WANT THIS. 
 
@@ -113,13 +114,13 @@ Openstreetmaps DOES NOT WANT THIS.
 Add 10% playback speed. Change speed options to % rather than decimals. 
 See if timer on player can include seconds.
 
--Add redux(?) and corresponding node files. Maybe use NATS for this also?
+-Add redux(?) and corresponding node files. Maybe use NATS/ROS2 for this also?
 
 -Add Satellites (with GPS) and flightaware. Add ISS (completed).
 
 -Add hourly update for weather map via a python backend chron job?
 
--Build sample Postgres database with Postgis add-on. To be continued... need to hook up django to db prgm on hard drive and put storage on external portable drive.
+-Beeks only. Build sample Postgres database with Postgis add-on. To be continued... need to hook up django to db prgm on hard drive and put storage on external portable drive.
 
 -Add Neo4j sample database and models file. 
 https://neo4j.com/developer-blog/neo4j-for-django-developers/ 
