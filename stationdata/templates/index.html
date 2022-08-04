@@ -11,6 +11,7 @@
 		 <br><br>
 		 <video controls Id="video1" width="100%" >
 		 <source src="{% static 'comet-vid.mp4' %}" type="video/mp4">
+		 <source src="{% static 'comet-vid.mp4' %}" type="video/mp4">
 		 <!-- sample with urL <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"> -->
 		 Your browser does not support HTML5 video. Use Chrome.
 		 </video>
@@ -37,10 +38,33 @@
 		<br><br>
 		<strong>Station T:</strong> <strong class="green">29.4 &#730; C</strong><br>
 		<strong>Ambient T:</strong> <strong class="green">28.7 &#730; C</strong><br>
-		<strong>Station H:</strong> <strong class="green">55.3 %</strong><br>
+		<strong>Station H:</strong> <strong class="green">55.3 %</strong><br><br><br>
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cameraMaskModal">
+  Camera Mask
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="cameraMaskModal" tabindex="-1" aria-labelledby="cameraMaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cameraMaskModalLabel">Camera Mask</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 	</div>
 	<div class="col-sm-4">
-		<h3>Toggle between ISS, Wit-motion, Flight, Weather, Satellites, Constellations</h3>
+		<h3>Toggle between APIs</h3>
 		<h3>ISS - Location - Real Time</h3>
 			<p>
 			ISS Location<br />
@@ -161,6 +185,29 @@
 	<div class="col-sm-3"></div>
 </div>  
 
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
