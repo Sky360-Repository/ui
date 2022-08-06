@@ -52,7 +52,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+
+
+  <h1>Camera Mask.<br>
+ 	Left click on mouse to paint pixels.<br>
+	<span>Click here to download image.</span>
+  </h1>
+  <canvas></canvas>
+
+
+...
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -200,6 +211,13 @@
         </button>
       </div>
       <div class="modal-body">
+
+
+  <h1>Camera Mask.<br>
+ 	Left click on mouse to paint pixels.<br>
+	<span>Click here to download image.</span>
+  </h1>
+  <canvas></canvas>
         ...
       </div>
       <div class="modal-footer">
@@ -209,6 +227,51 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  window.addEventListener('load', function(ev) {
+    var sourceimage = document.querySelector('img');
+    var canvas = document.querySelector('canvas');
+    var link = document.querySelector('a');
+    var context = canvas.getContext('2d');
+    var mouseX = 0, mouseY = 0,
+        width = 300, height = 300, 
+	//TO DO get correct width/height of camera img? do 100%?
+        mousedown = false;
+    canvas.width = width;
+    canvas.height = height;
+    context.fillStyle = 'black'; 
+    function draw(ev) {
+      if (mousedown) {
+        var x = ev.layerX;
+        var y = ev.layerY;
+        x = (Math.ceil(x / 10) * 10) - 10;
+        y = (Math.ceil(y / 5) * 5) - 5;
+        context.fillRect(x, y, 10, 5);
+      }
+    }
+    var link = document.createElement('a');
+        link.innerHTML = 'download image';
+        link.href = "#";
+        link.download = "cameramask.png";
+    document.body.insertBefore(link, canvas);
+    canvas.addEventListener('mouseover', function(ev) {
+      document.body.classList.add('painted');
+    }, false);
+    canvas.addEventListener('mousemove', draw, false);
+    canvas.addEventListener('mousedown', function(ev) {
+      mousedown = true;
+    }, false );
+    canvas.addEventListener('mouseup', function(ev) {
+      link.href = canvas.toDataURL();
+      mousedown = false;
+    }, false );
+  } ,false);
+</script>
+
+
+
 
 <script>
     // api_urlw update to users location (remove hardcoded coords) and key(?)
