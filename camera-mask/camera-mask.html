@@ -23,7 +23,7 @@
       opacity: 0;
     }
     .painted a[download], .painted h1 span {
-      opacity: 1;
+      /* opacity: 1; */
       transition: 0.5s;
     }
   </style>
@@ -61,7 +61,7 @@
     var link = document.createElement('a');
         link.innerHTML = 'download image';
         link.href = "#";
-        link.download = "cameramask.png";
+        link.download = "cameramask.jpg";
     document.body.insertBefore(link, canvas);
     canvas.addEventListener('mouseover', function(ev) {
       document.body.classList.add('painted');
