@@ -47,7 +47,7 @@
         mousedown = false;
     canvas.width = width;
     canvas.height = height;
-    context.fillStyle = 'black'; 
+    context.fillStyle = 'blue'; 
     //TO DO change so that you can use pen, touch and mouse
     function draw(ev) {
       if (mousedown) {
@@ -71,7 +71,7 @@
       mousedown = true;
     }, false );
     canvas.addEventListener('mouseup', function(ev) {
-      link.href = canvas.toDataURL();
+      link.href = canvas.toDataURL('image/jpeg', 1.0);
       mousedown = false;
     }, false );
   } ,false);
