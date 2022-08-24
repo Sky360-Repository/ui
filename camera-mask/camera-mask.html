@@ -75,6 +75,30 @@
       mousedown = false;
     }, false );
   } ,false);
+
+
+
+/*
+WORK IN PROGRESS
+This works to change non-mask pixels to white. 
+
+var imgData=context.getImageData(0,0,canvas.width,canvas.height);
+var data=imgData.data;
+for(var i=0;i<data.length;i+=4){
+    if(data[i+3]<255){
+        data[i] = 255 - data[i];
+        data[i+1] = 255 - data[i+1];
+        data[i+2] = 255 - data[i+2];
+        data[i+3] = 255 - data[i+3];
+    }
+}
+context.putImageData(imgData,0,0);
+
+TODO: Write function so that when user is ready to send image, non-masked pixels are converted to white and then 'download' option appears.  
+*/ 
+
+
+
 </script>
 </body>
 </html>
