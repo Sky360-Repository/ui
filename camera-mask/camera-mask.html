@@ -5,78 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="camera-mask.css">
   <style type="text/css">
+    
+     /* TODO - Will need to automatically load bg img into css bg tag w/ js. Get img file via ROS2 DDS*/
     canvas {
       background: url('Screenshot-2022-08-25.jpg');
-      /* TO DO - Will need to automatically load bg img into css bg tag w/ js. Get img file via ROS2 DDS*/
+      margin-top:20px;
     }
-    a[download]{
+    
+    a[download] {
       display: block;
-      width: 280px;
-      background: #ccff99;
-      color: #660066;
-      font-weight: bold;
+      width: 140px;
+      background-color:#646464;
+      color: #99001A;
+      font-weight:bold;
       text-decoration: none;
       padding: 10px;
       border-radius: 15px;
     }
+
     a[download], h1 span {
-      opacity: 0;
+      opacity: 1;
     }
+
     .painted a[download], .painted h1 span {
       opacity: 1;
       transition: 0.5s;
     }
+
+    body {
+    font-size:16px;
+    font-weight:bold;
+    color:#646464;
+    background-color:#282828;
+    padding:25px;
+    }
+
+
   </style>
 </head>
 <body>
-  <h1>Camera Mask.<br>
- 	Left click on mouse to paint pixels.<br><br><br>
-	<span>Click here to download image.</span>
+  <h1>CAMERA MASK
   </h1>
-  <canvas></canvas>
+  <br><br>
+  Left click on mouse to paint pixels.<br>
+  <br>
+  <canvas Id="Mask"></canvas>
 
 <script>
-  window.addEventListener('load', function(ev) {
-    var sourceimage = document.querySelector('img');
-    var canvas = document.querySelector('canvas');
-    var link = document.querySelector('a');
-    var context = canvas.getContext('2d');
-    var mouseX = 0, mouseY = 0,
-        width = 632, height = 630,
-	//TO DO get correct width/height of camera img from AI software via ROS2 DDS? do 100%?
-        mousedown = false;
-    canvas.width = width;
-    canvas.height = height;
-    context.fillStyle = 'white'; 
-    //TO DO change so that you can use pen, touch and mouse
-    function draw(ev) {
-      if (mousedown) {
-        var x = ev.layerX;
-        var y = ev.layerY;
-        x = (Math.ceil(x / 5) * 5) - 5;
-        y = (Math.ceil(y / 5) * 5) - 5;
-        context.fillRect(x, y, 5, 5);
-        //TODO try to make pixels emulate gradients for smoother appearance
-      }
-    }
-    var link = document.createElement('a');
-        link.innerHTML = 'download image';
-        link.href = "#";
-        link.download = "cameramask.jpg";
+var sourceimage = document.querySelector('img');
+var canvas = document.getElementById("Mask");
+var context = canvas.getContext("2d");
+var link = document.querySelector('a');
+
+
+var link = document.createElement('a');
+    link.innerHTML = 'Download Image';
+    link.href = "#";
+    link.download = "mypainting.png";
     document.body.insertBefore(link, canvas);
-    canvas.addEventListener('mouseover', function(ev) {
-      document.body.classList.add('painted');
-    }, false);
-    canvas.addEventListener('mousemove', draw, false);
-    canvas.addEventListener('mousedown', function(ev) {
-      mousedown = true;
-    }, false );
-    canvas.addEventListener('mouseup', function(ev) {
+
+
+width = 632, height = 630,
+canvas.width = width;
+canvas.height = height;
+
+canvas.onclick = function(e) {
+  var pos = getMousePos(canvas, e);    
+  context.fillStyle = "white";    
+  context.beginPath();                  
+  context.arc(pos.x, pos.y, 10, 0, 2 * Math.PI); 
+  context.fill();
+}
+
+function getMousePos(canvas, evt) {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top
+  };
+}
+
+canvas.addEventListener('mouseup', function(ev) {
       link.href = canvas.toDataURL('image/jpeg', 1.0);
       mousedown = false;
     }, false );
-  } ,false);
-
 
 
 /*
@@ -101,8 +113,6 @@ they click on button and
 -and then 'download' option appears
 -and then they click on 'download' to save img to file for ROS2 DDS to pick up and send to ...  
 */ 
-
-
 
 </script>
 </body>

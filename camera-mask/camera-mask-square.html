@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="camera-mask.css">
+  <style type="text/css">
+    canvas {
+      background: url('Screenshot-2022-08-25.jpg');
+      /* TO DO - Will need to automatically load bg img into css bg tag w/ js. Get img file via ROS2 DDS*/
+    }
+    a[download]{
+      display: block;
+      width: 280px;
+      background: #ccff99;
+      color: #660066;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 15px;
+    }
+    a[download], h1 span {
+      opacity: 0;
+    }
+    .painted a[download], .painted h1 span {
+      opacity: 1;
+      transition: 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <h1>Camera Mask.<br>
+ 	Left click on mouse to paint pixels.<br><br><br>
+	<span>Click here to download image.</span>
+  </h1>
+  <canvas></canvas>
+
+<script>
+  window.addEventListener('load', function(ev) {
+    var sourceimage = document.querySelector('img');
+    var canvas = document.querySelector('canvas');
+    var link = document.querySelector('a');
+    var context = canvas.getContext('2d');
+    var mouseX = 0, mouseY = 0,
+        width = 632, height = 630,
+	//TO DO get correct width/height of camera img from AI software via ROS2 DDS? do 100%?
+        mousedown = false;
+    canvas.width = width;
+    canvas.height = height;
+    context.fillStyle = 'white'; 
+    //TO DO change so that you can use pen, touch and mouse
+    function draw(ev) {
+      if (mousedown) {
+        var x = ev.layerX;
+        var y = ev.layerY;
+        x = (Math.ceil(x / 5) * 5) - 5;
+        y = (Math.ceil(y / 5) * 5) - 5;
+        context.fillRect(x, y, 5, 5);
+        //TODO try to make pixels emulate gradients for smoother appearance
+      }
+    }
+    var link = document.createElement('a');
+        link.innerHTML = 'download image';
+        link.href = "#";
+        link.download = "cameramask.jpg";
+    document.body.insertBefore(link, canvas);
+    canvas.addEventListener('mouseover', function(ev) {
+      document.body.classList.add('painted');
+    }, false);
+    canvas.addEventListener('mousemove', draw, false);
+    canvas.addEventListener('mousedown', function(ev) {
+      mousedown = true;
+    }, false );
+    canvas.addEventListener('mouseup', function(ev) {
+      link.href = canvas.toDataURL('image/jpeg', 1.0);
+      mousedown = false;
+    }, false );
+  } ,false);
+
+
+
+/*
+WORK IN PROGRESS
+This works to change non-mask pixels to white. 
+
+var imgData=context.getImageData(0,0,canvas.width,canvas.height);
+var data=imgData.data;
+for(var i=0;i<data.length;i+=4){
+    if(data[i+3]<255){
+        data[i] = 255 - data[i];
+        data[i+1] = 255 - data[i+1];
+        data[i+2] = 255 - data[i+2];
+        data[i+3] = 255 - data[i+3];
+    }
+}
+context.putImageData(imgData,0,0);
+
+TODO: Write new function so that when user is ready to send image with mask, 
+they click on button and 
+-non-masked pixels are converted to white
+-and then 'download' option appears
+-and then they click on 'download' to save img to file for ROS2 DDS to pick up and send to ...  
+*/ 
+
+
+
+</script>
+</body>
+</html>
